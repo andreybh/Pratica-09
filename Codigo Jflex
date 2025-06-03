@@ -1,0 +1,13 @@
+%{
+  import java_cup.runtime.Symbol;
+%}
+
+[0-9]+     { return new Symbol(sym.INTEIRO, new Integer(yytext())); }
+"*"        { return new Symbol(sym.MULTIPLICACAO); }
+"/"        { return new Symbol(sym.DIVISAO); }
+"%"        { return new Symbol(sym.RESTO); }
+"^"        { return new Symbol(sym.POTENCIA); }
+"("        { return new Symbol(sym.ABRE_PARENTESE); }
+")"        { return new Symbol(sym.FECHA_PARENTESE); }
+[\t\n\r ]+ { /* ignora espaços */ }
+.          { System.out.println("Caractere inválido: " + yytext()); }
