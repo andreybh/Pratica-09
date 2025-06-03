@@ -1,0 +1,24 @@
+terminal INTEIRO;
+terminal MULTIPLICACAO, DIVISAO, RESTO, POTENCIA;
+terminal ABRE_PARENTESE, FECHA_PARENTESE;
+
+non terminal Integer expr;
+
+precedence left MULTIPLICACAO, DIVISAO, RESTO;
+precedence right POTENCIA;
+
+start with expr;
+
+expr ::= expr MULTIPLICACAO expr
+        {: RESULT = $1 * $3; :}
+       | expr DIVISAO expr
+        {: RESULT = $1 / $3; :}
+       | expr RESTO expr
+        {: RESULT = $1 % $3; :}
+       | expr POTENCIA expr
+        {: RESULT = (int)Math.pow($1, $3); :}
+       | ABRE_PARENTESE expr FECHA_PARENTESE
+        {: RESULT = $2; :}
+       | INTEIRO
+        {: RESULT = $1; :}
+       ;
